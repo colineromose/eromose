@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Savings Group Web App</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    .container {
+      margin-top: 30px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Savings Group Web App</h1>
+
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input type="text" class="form-control" id="name">
+    </div>
+
+    <div class="form-group">
+      <label for="tier">Tier:</label>
+      <select class="form-control" id="tier">
+        <option value="1">Tier 1</option>
+        <option value="2">Tier 2</option>
+        <option value="3">Tier 3</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="members">Number of Members:</label>
+      <input type="number" class="form-control" id="members" min="1">
+    </div>
+
+    <button type="button" class="btn btn-primary" onclick="calculateSavings()">Calculate</button>
+
+    <div id="result" class="mt-3">
+      <!-- Result will be displayed here -->
+    </div>
+  </div>
+
+  <script>
+    function calculateSavings() {
+      var name = document.getElementById('name').value;
+      var tier = document.getElementById('tier').value;
+      var members = parseInt(document.getElementById('members').value);
+      var interestRate = getInterestRate(tier);
+      var principal = 100; // Initial deposit of $100
+
+      var interest = principal * interestRate;
+      var total = principal + interest;
+
+      var perMemberInterest = interest / members;
+      var perMemberTotal = total / members;
+
+      var result = document.getElementById('result');
+      result.innerHTML = '<p><strong>' + name + '</strong></p>';
+      result.innerHTML += '<p>Interest: #' + interest.toFixed(2) + '</p>';
+      result.innerHTML += '<p>Total Money: #' + total.toFixed(2) + '</p>';
+      result.innerHTML += '<p>Per Member Interest: #' + perMemberInterest.toFixed(2) + '</p>';
+      result.innerHTML += '<p>Per Member Total Money: #' + perMemberTotal.toFixed(2) + '</p>';
+    }
+
+    function getInterestRate(tier) {
+      switch (tier) {
+        case '1':
+          let Tier_1 = 0.05;
+          return Tier_1;
+        case '2':
+          let Tier_2 = 0.1;
+          return Tier_2;
+        case '3':
+          let Tier_3 = 0.2;
+          return Tier_3;
+        default:
+          return 0;
+      }
+    }
+  </script>
+</body>
+
+</html>
